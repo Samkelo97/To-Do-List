@@ -5,11 +5,8 @@ let todoItemsList = document.querySelector('.todo-items');
 let todos = [];
 
 todoForm.addEventListener('submit', function(event) {
-
-  event.preventDefault();
   addTodo(todoInput.value);
 });
-
 
 function addTodo(item) {
 
@@ -28,8 +25,14 @@ function addTodo(item) {
   else{
     alert('please add task');
   }
+  let myDate = new Date(); 
+  
+//Get only the date 
+console.log("date: ", myDatetoLocaleDateString()); 
+//Obtain only the time 
+console.log("time: ", myDate.toLocaleTimeString());
 }
-function renderTodos(todos) {
+function myToDo(todos) {
 
   todoItemsList.innerHTML = '';
 
@@ -56,13 +59,13 @@ li.innerHTML = `
 function addToLocalStorage(todos) {
   localStorage.setItem('todos', JSON.stringify(todos));
 
-  renderTodos(todos);
+  myToDo(todos);
 }
 function getFromLocalStorage() {
   const reference = localStorage.getItem('todos');
   if (reference) {
     todos = JSON.parse(reference);
-    renderTodos(todos);
+    myToDo(todos);
   }
 }
 function toggle(id) {
@@ -90,4 +93,4 @@ todoItemsList.addEventListener('click', function(event) {
   if (event.target.classList.contains('delete-button')) {
     deleteTodo(event.target.parentElement.getAttribute('data-key'));
   }
-})
+});
